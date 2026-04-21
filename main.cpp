@@ -1,41 +1,47 @@
 #include <iostream>
 #include "Library.h"
+// Author.h and Book.h are implicitly included via Library.h
 
 using namespace std;
 
 int main() {
-    // 1. Create the data objects
-    Book low, med, high;
-    low.setBookDetails("1984", "Orwell", "111", true, "2023");
-    med.setBookDetails("Gatsby", "Scott", "555", true, "2023");
-    high.setBookDetails("Moby", "Melville", "999", true, "2023");
+    // 1. Create the Author objects
+    Author author1("George Orwell");
+    Author author2("F. Scott Fitzgerald");
+    Author author3("Herman Melville");
 
-    // Scenario A: Ascending Order Added (111, 555, 999)
+    // 2. Create the Book objects and pass the Authors into the setup
+    Book bLow, bMed, bHigh;
+    bLow.setBookDetails("1984", author1, "101", true, "2023");
+    bMed.setBookDetails("The Great Gatsby", author2, "505", true, "2023");
+    bHigh.setBookDetails("Moby Dick", author3, "909", true, "2023");
+
+    // --- TEST ARRAY 1: ASCENDING ORDER ADDED ---
     Library libAsc;
-    libAsc.addBook(low); libAsc.addBook(med); libAsc.addBook(high);
+    libAsc.addBook(bLow); libAsc.addBook(bMed); libAsc.addBook(bHigh);
 
-    // Scenario B: Descending Order Added (999, 555, 111)
+    // --- TEST ARRAY 2: DESCENDING ORDER ADDED ---
     Library libDesc;
-    libDesc.addBook(high); libDesc.addBook(med); libDesc.addBook(low);
+    libDesc.addBook(bHigh); libDesc.addBook(bMed); libDesc.addBook(bLow);
 
-    // Scenario C: Mixed Order Added (555, 999, 111)
+    // --- TEST ARRAY 3: MIXED ORDER ADDED ---
     Library libMixed;
-    libMixed.addBook(med); libMixed.addBook(high); libMixed.addBook(low);
+    libMixed.addBook(bMed); libMixed.addBook(bHigh); libMixed.addBook(bLow);
 
     cout << "=== BEFORE SORTING ===" << endl;
-    cout << "\nArray 1 (Added Ascending):\n"; libAsc.displayLibrary();
-    cout << "\nArray 2 (Added Descending):\n"; libDesc.displayLibrary();
-    cout << "\nArray 3 (Added Mixed):\n"; libMixed.displayLibrary();
+    cout << "Array 1 (Ascending):" << endl; libAsc.displayLibrary();
+    cout << "\nArray 2 (Descending):" << endl; libDesc.displayLibrary();
+    cout << "\nArray 3 (Mixed):" << endl; libMixed.displayLibrary();
 
-    // Call Sort on all three
+    // Call sort function on all three arrays
     libAsc.sortCatalog();
     libDesc.sortCatalog();
     libMixed.sortCatalog();
 
-    cout << "\n\n=== AFTER SORTING (All should now be 111, 555, 999) ===" << endl;
-    cout << "\nArray 1 Results:\n"; libAsc.displayLibrary();
-    cout << "\nArray 2 Results:\n"; libDesc.displayLibrary();
-    cout << "\nArray 3 Results:\n"; libMixed.displayLibrary();
+    cout << "\n\n=== AFTER SORTING (All should be 101 -> 505 -> 909) ===" << endl;
+    cout << "Array 1 Result:" << endl; libAsc.displayLibrary();
+    cout << "\nArray 2 Result:" << endl; libDesc.displayLibrary();
+    cout << "\nArray 3 Result:" << endl; libMixed.displayLibrary();
 
     return 0;
 }
