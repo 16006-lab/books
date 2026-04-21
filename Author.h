@@ -8,15 +8,23 @@ using namespace std;
 class Author {
 private:
     string Name;
+    string Surname;
+    string BirthDate;
+    string Gender;
 
 public:
-    // Constructors
-    Author() : Name("") {}
-    Author(string n) : Name(n) {}
+    Author() : Name(""), Surname(""), BirthDate(""), Gender("") {}
 
-    // Setters and Getters
-    void setName(string n) { Name = n; }
-    string getName() const { return Name; }
+    void setAuthorDetails(string n, string s, string dob, string g) {
+        Name = n;
+        Surname = s;
+        BirthDate = dob;
+        Gender = g;
+    }
+
+    string getFullName() const {
+        return Name + " " + Surname;
+    }
 };
 
 #endif

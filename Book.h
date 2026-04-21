@@ -4,23 +4,21 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include "Author.h" // Import the new Author class
+#include "Author.h"
 
 using namespace std;
 
 class Book {
 private:
     string Title;
-    Author bookAuthor; // Changed from string to Author object
+    Author bookAuthor;
     string ISBN;
     bool Availability;
     string DateAdd;
 
 public:
-    // Default constructor
     Book() : Title(""), ISBN(""), Availability(false), DateAdd("") {}
 
-    // Updated initialization method taking an Author object
     void setBookDetails(string t, Author a, string i, bool avail, string date) {
         Title = t;
         bookAuthor = a;
@@ -32,9 +30,8 @@ public:
     string getISBN() const { return ISBN; }
     
     void displayBookDetails() const {
-        // We use bookAuthor.getName() to extract the author's string value for display
         cout << left << setw(20) << Title 
-             << setw(20) << bookAuthor.getName() 
+             << setw(20) << bookAuthor.getFullName() 
              << setw(15) << ISBN 
              << (Availability ? "Available" : "Borrowed") << endl;
     }
