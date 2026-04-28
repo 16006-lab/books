@@ -5,15 +5,18 @@
 
 class Library {
 private:
-    Book catalog[3]; 
+    Book catalog[3];
     int count = 0;
 
 public:
-    void addBook(const Book& b) {
-        if (count < 3) {
+    bool addBook(const Book& b) {
+        if (count < 3 && b.isValid()) {
             catalog[count] = b;
             count++;
+            return true;
         }
+
+        return false;
     }
 
     void sortCatalog() {
